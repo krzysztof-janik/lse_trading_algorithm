@@ -6,8 +6,8 @@ library(DBI)
 
 #Here you specify your connection parameters
 db <- "lse_db"
-db_user <- 'krzysztofjanik' 
-db_password <- 'krzysio1'
+db_user <- '####' 
+db_password <- '####'
 db_port <- '5432'
 #This connection will be used throught the script
 default_connection <- dbConnect(RPostgres::Postgres(), dbname = db, port=db_port, user=db_user,
