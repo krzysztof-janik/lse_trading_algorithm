@@ -13,6 +13,8 @@ working with timeseries data, ggplot2 for plots. I also specify my
 connection parameters here. The seed is set so that the random elements
 can be reproduced.
 
+    knitr::opts_chunk$set(fig.path='Figs/')
+
     library(DBI)
     library(xts)
     library(ggplot2)
@@ -160,9 +162,8 @@ the 4th of January 2016, in our full strategy.
     ## Scale for 'y' is already present. Adding another scale for 'y', which
     ## will replace the existing scale.
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
-As we can see, adding a stoploss hugely improves performance,
-particularly later on in the strategy.
+![](Figs/unnamed-chunk-7-1.png)<!-- --> As we can see, adding a stoploss
+hugely improves performance, particularly later on in the strategy.
 
     #need to use aes_string
     p <- ggplot()
@@ -185,49 +186,48 @@ particularly later on in the strategy.
 
     q
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](Figs/unnamed-chunk-8-1.png)<!-- -->
 
     p
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
-In both graphs the thickets line is the actual performance. What we can
-take aways from these are: depending on how many n we choose, we get
-drastically different curves, with different total returns bigger n isnt
-always the best option, there combinations of stocks that offer
-outstanding performacne (finding these is the subject of part 3 of my
-analysis) The last step of this part is to compare how other different
-parameters change with N, again the easiet way is to use graphical
-means.
+![](Figs/unnamed-chunk-8-2.png)<!-- --> In both graphs the thickets line
+is the actual performance. What we can take aways from these are:
+depending on how many n we choose, we get drastically different curves,
+with different total returns bigger n isnt always the best option, there
+combinations of stocks that offer outstanding performacne (finding these
+is the subject of part 3 of my analysis) The last step of this part is
+to compare how other different parameters change with N, again the
+easiet way is to use graphical means.
 
     sec <- "#4285F4"
     ec <- "#0F9D58"
     mean_return <- ggplot() + geom_abline(slope = 0, intercept = true_report$mean_return, col = ec, linetype = 2) + geom_abline(slope = 0, intercept = true_report$mean_sreturn, col = sec, linetype = 2) + geom_point(mapping = aes(x = report_dataframe$N, y = report_dataframe$mean_return, col = ec)) + geom_point(mapping = aes(x = report_dataframe$N, y = report_dataframe$mean_sreturn, col = sec)) + ggtitle("") + xlab("N") + ylab("Mean return (%)") + theme(plot.title = element_text(hjust = 0.5)) + scale_y_continuous(breaks=seq(-1.5,3,0.2)) + scale_color_identity(guide = "legend", labels = c("Without stoploss", "Stoploss of -2%"), name = "") + scale_x_continuous(breaks=seq(0,1000,50))
     mean_return
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](Figs/unnamed-chunk-9-1.png)<!-- -->
 
     ggplot() + geom_bar(aes(y = 100 * (abs(report_dataframe$mean_return - true_report$mean_return) / true_report$mean_return), x = report_dataframe$N), stat = "identity", fill = ec, position = "dodge")
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](Figs/unnamed-chunk-10-1.png)<!-- -->
 
     ggplot() + geom_bar(aes(y = 100 * (abs(report_dataframe$mean_sreturn - true_report$mean_sreturn) / true_report$mean_sreturn), x = report_dataframe$N), stat = "identity", fill = sec, position = "dodge")
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](Figs/unnamed-chunk-11-1.png)<!-- -->
 
     df_barplot <- data.frame(N = c(report_dataframe$N, report_dataframe$N), diff = c(100* abs(report_dataframe$mean_return - true_report$mean_return)/ true_report$mean_return,100 * abs(report_dataframe$mean_sreturn - true_report$mean_sreturn)/ true_report$mean_sreturn), type = c(rep("e", 71), rep("se", 71)))
 
     bar <- ggplot() + geom_bar(aes(x = df_barplot$N, y = df_barplot$diff, fill = df_barplot$type), stat = "identity", position = "dodge") + ylab("Difference (%)") + xlab("N") + ggtitle("") + scale_y_continuous(breaks=seq(0,400,50)) + scale_x_continuous(breaks=seq(0,1000,50)) + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_manual(values = c(ec, sec), guide = "legend", labels = c("Without stoploss", "Stoploss of -2%"), name = "")
     bar
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](Figs/unnamed-chunk-13-1.png)<!-- -->
 
     mean_return
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-13-2.png)<!-- -->
+![](Figs/unnamed-chunk-13-2.png)<!-- -->
 
     ggarrange(mean_return, bar, ncol = 2, nrow = 1, labels = c("Mean return", "% difference from true value"))
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-13-3.png)<!-- -->
+![](Figs/unnamed-chunk-13-3.png)<!-- -->
 
     create_point_plot <- function(e, se, te, tse, title, y_breaks, y_lab){
       point_plot <- ggplot() + geom_abline(slope = 0, intercept = te, col = ec, linetype = 2) + geom_abline(slope = 0, intercept = tse, col = sec, linetype = 2) + geom_point(mapping = aes(x = report_dataframe$N, y = e, col = ec)) + geom_point(mapping = aes(x = report_dataframe$N, y = se, col = sec)) + ggtitle(title) + xlab("N") + ylab(y_lab) + theme(plot.title = element_text(hjust = 0.5)) + scale_color_identity(guide = "legend", labels = c("Without stoploss", "Stoploss of -2%"), name = "") + scale_x_continuous(breaks=seq(0,1000,50))
@@ -241,39 +241,39 @@ means.
     ## Warning in if (y_breaks != "skip") {: the condition has length > 1 and only
     ## the first element will be used
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](Figs/unnamed-chunk-14-1.png)<!-- -->
 
     create_point_plot(report_dataframe$total_return, report_dataframe$total_sreturn, true_report$total_return, true_report$total_sreturn, "Total return", seq(0,650,50), "Total return (x times)")
 
     ## Warning in if (y_breaks != "skip") {: the condition has length > 1 and only
     ## the first element will be used
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](Figs/unnamed-chunk-15-1.png)<!-- -->
 
     create_point_plot(report_dataframe$sharpe, report_dataframe$ssharpe, true_report$sharpe, true_report$ssharpe, "Sharpe ratio", round(seq(-0.6,0.5,0.1),1), "Sharpe ratio")
 
     ## Warning in if (y_breaks != "skip") {: the condition has length > 1 and only
     ## the first element will be used
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](Figs/unnamed-chunk-16-1.png)<!-- -->
 
     create_point_plot(report_dataframe$max_drawdown, report_dataframe$smax_drawdown, true_report$max_drawdown, true_report$smax_drawdown, "Max drawdown", seq(-100,0,10), "Max drawdown (%)")
 
     ## Warning in if (y_breaks != "skip") {: the condition has length > 1 and only
     ## the first element will be used
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](Figs/unnamed-chunk-17-1.png)<!-- -->
 
     create_point_plot(report_dataframe$max_drawdown_duration, report_dataframe$smax_drawdown_duration, true_report$max_drawdown_duration, true_report$smax_drawdown_duration, "Max drawdown duration", "skip", "Max drawdown duration (days)")
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](Figs/unnamed-chunk-18-1.png)<!-- -->
 
     ggarrange(mean_return, bar, ncol = 1, nrow = 2, labels = c("Mean return", "% difference from true value"))
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+![](Figs/unnamed-chunk-19-1.png)<!-- -->
 
     ggarrange(mean_return, bar, ncol = 2, nrow = 1, labels = c("Mean return", "% difference from true value"))
 
-![](analysis_part1_output_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](Figs/unnamed-chunk-20-1.png)<!-- -->
 
     save(dates,equity,sequity,report_dataframe,true_report, file = "part1_data.RData")
