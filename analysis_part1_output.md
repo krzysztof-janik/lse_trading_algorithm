@@ -1,13 +1,13 @@
-Analysis part 1
+Part 1: optimising simulation time
 ================
 Krzysztof Janik
-02/11/2020
+05/11/2020
 
-This is the analysis of my trading strategy. The analysis consists of 3
-main parts: 1. Checking whether it’s possible to cut down on simulation
-time. 2. Choosing the best set of trading parameters. 3. For the best
-performing strategy, choose the best stocks via linear regression.
-
+\#\#The analysis constis of 3 parts.  
+\* Part 1 deals with optimising the simulation time.  
+\* Part 2 is about finding the best set of parameters for a strategy.  
+\* Part 3 tries to further optimise the strategy via linear
+regression.  
 Firstly, I load the libraries: DBI for database connection, xts for
 working with timeseries data, ggplot2 for plots. I also specify my
 connection parameters here. The seed is set so that the random elements
