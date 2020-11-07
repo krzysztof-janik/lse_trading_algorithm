@@ -14,7 +14,7 @@ Before assessing the performance of a strategy, here are the assumptions I made:
 6. Lastly, the data I have suffers from survivorship bias.
 
 The project consists of 3 analysis files:
-1. Here I try to optimise simulation time. link
+1. Here I try to optimise simulation time. https://github.com/krzysztof-janik/lse_trading_algorithm/blob/main/part1_analysis/part1_analysis.md
 2. __To be completed__ This part looks at finding optimal parameters maximising the profitability of my strategy.
 3. __To be completed__ The last file seeks to further optimise the strategy by trying to choose only a few stocks each day that have the most potential.
 
