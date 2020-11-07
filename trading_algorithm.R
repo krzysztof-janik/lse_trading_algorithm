@@ -3,7 +3,7 @@
 #adjust.
 
 
-#The libraries. xts is used to ease implementing rolling means. DBI enables connecting to the PostgreSQL database set up in db_creation.py.
+#The libraries. xts is used to ease implementing rolling means. DBI enables the user to connect to the PostgreSQL database set up in db_creation.py.
 library(xts)
 library(DBI)
 
