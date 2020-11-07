@@ -18,6 +18,8 @@ The project consists of 3 analysis files:
 2. __To be completed__ This part looks at finding optimal parameters maximising the profitability of my strategy.
 3. __To be completed__ The last file seeks to further optimise the strategy by trying to choose only a few stocks each day that have the most potential.
 
+Each part has it's own folder, containing the .md file that you can view, the .Rmd file used to generate the report, and a Figs folder with graphs. 
+
 I also include two files that enable the analysis:
 * *db_creation.py* creates a PostgreSQL database with the stockmarket data. You can run it yourself, and either download the data from scratch
 (for that you need the *Trading statistics September 2020.xlsx* file) or use the data file *prices.csv* that I supply __not yet, it's over github's file size limit__. Further instructions inside the file.
