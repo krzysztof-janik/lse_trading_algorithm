@@ -2,10 +2,7 @@
 title: "Part 1: optimising simulation time"
 author: Krzysztof Janik
 date: 05/11/2020
-output:
-  html_document:
-    keep_md: yes
-  github_document: default
+output: github_document
 ---
 This is part 1 out of 3 my analysis. The question that I will try to answer here is: do I have to run a full backtest to see how a strategy performs, or is it enought to use fewer, randomly chosen stocks?   
 
