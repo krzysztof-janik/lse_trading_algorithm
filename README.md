@@ -1,7 +1,7 @@
 # lse_trading_algorithm
 A trading system generating buy and sell signals for stocks listed on the London Stock Exchange.
 The algorithm calculates a short and long rolling average. A buy signal is generated if:
-1. Previous day's return (calculated close to close) if above or below a cutoff value (ie. 10% and -7%). This is a simple way to capture volatility.
+1. Previous day's return (calculated close to close) is above or below a cutoff value (ie. 10% and -7%). This is a simple way to capture volatility.
 2. Short rolling average is higher than the long rolling average. This is to capture momentum, or reversal.
 I also include a filter that exludes very cheap stocks, as well as those with little volume.
 
@@ -13,13 +13,14 @@ Before assessing the performance of a strategy, here are the assumptions I made:
 5. I include a stop loss, which assumes I can sell the security at precisely the loss limit.
 6. Lastly, the data I have suffers from survivorship bias.
 
-So far the project consists of 3 files, one with data and two scripts. My goal is to add one more data file and an R markdown file where I analyse the strategy and optimise for the best return.
+The project consists of 3 analysis files:
+1. Here I try to optimise simulation time. link
+2. __To be completed__ This part looks at finding optimal parameters maximising the profitability of my strategy.
+3. __To be completed__ The last file seeks to further optimise the strategy by trying to choose only a few stocks each day that have the most potential.
 
-How to use...
+I also include two files that enable the analysis:
+* *db_creation.py* creates a PostgreSQL database with the stockmarket data. You can run it yourself, and either download the data from scratch
+(for that you need the *Trading statistics September 2020.xlsx* file) or use the data file *prices.csv* that I supply __not yet, it's over github's file size limit__. Further instructions inside the file.
+* *trading_algorithm.R* contains functions used in the 3 analysis files. You can also run it yourself, to generate trades based on the parameters you specify inside the file.
 
-The first file you have to run is the python script 'db_creation.py'. Make sure to open the file before running it, as you have to adjust your sql settings.
-The file creates a database on your computer in one of 2 ways. You can either opt to download all the data or use the data I supply. Mind that it takes a while for
-the download process to finish, and you may lose connection while doing so. I also gave the possibility of adjusting the time horizon for the download.
-I only supplied the data file used for download, 'Trading statistics September 2020.xlsx'. I will inlcude the data for setting up the database without the need to download, but I have to work around Githubs max file size limit.
-
-After you set up the database, you can use the R script trading_algorithm.R to run a strategy of your own. You can adjust all the variables (lenghts of rolling averages, stoploss limits etc). This script is primarly a set of functions that I will import in the final analysis part.
+Feel free to reach out to me if you have any questions!
