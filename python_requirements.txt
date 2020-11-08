@@ -1,0 +1,4 @@
+pandas==1.1.2
+numpy==1.19.1
+yfinance==0.1.54
+psycopg2==2.8.4
