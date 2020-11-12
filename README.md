@@ -21,7 +21,7 @@ The project consists of 3 analysis files:
 Each part has it's own folder, containing the .md file that you can view, the .Rmd file used to generate the report, and a Figs folder with graphs. 
 
 I also include two files that enable the analysis:
-* *db_creation.py* creates a PostgreSQL database with the stockmarket data. You can run it yourself, and either download the data from scratch
+* *db_create.py* creates a PostgreSQL database with the stockmarket data. You can run it yourself, and either download the data from scratch
 (for that you need the *Trading statistics September 2020.xlsx* file) or use the data file *prices.csv* that I supply __not yet, it's over github's file size limit__. Further instructions inside the file.
 * *trading_algorithm.R* contains functions used in the 3 analysis files. You can also run it yourself, to generate trades based on the parameters you specify inside the file.
 
